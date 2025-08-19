@@ -44,3 +44,5 @@ resource "azurerm_subnet" "subnet2" {
   address_prefixes = [var.subnet2_prefix]
   
 }
+
+#edited the code
