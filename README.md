@@ -6,7 +6,7 @@ This project demonstrates how to securely connect GitHub Actions workflows to Az
 
 ---
 
-## ❗ Problem Statement
+## ❗ Problem Statement 
 
 Many organisations face challenges with secrets in CI/CD pipelines:
 
