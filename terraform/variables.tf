@@ -54,3 +54,8 @@ variable "subscription_id" {
     description = "place holder for our subscription"
     type = string  ######
 }
+
+
+variable "vm_size" { default = "Standard_B1s" }
+variable "admin_username" { default = "azureuser" }
+variable "admin_password" { default = "Password123!" } # or use SSH key
