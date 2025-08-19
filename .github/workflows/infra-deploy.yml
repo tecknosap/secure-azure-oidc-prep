@@ -35,39 +35,20 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      # # 🔍 Static Analysis: TFLint
-      # - name: Install TFLint
-      #   run: |
-      #     curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
-      #     tflint --version
-
-      # - name: Run TFLint
-      #   run: tflint --chdir=./terraform
-
-      # - name: Install Checkov
-      #   run: pip install checkov
-
-      # - name: Run Checkov (Soft Fail)
-      #   run: checkov -d . --soft-fail --quiet --compact
-      #   working-directory: ./terraform
-
       # 🚀 Terraform Execution
       - name: Terraform Init
-        run: terraform init -input=false
+        run: terraform init -input=false -reconfigure
         working-directory: ./terraform
-
-      # - name: Force Unlock Stale Terraform Lock (if any)
-      #   run: terraform force-unlock -force  5bd82b52-0031-53ae-fe44-8f1ca0ee7c49
-      #   working-directory: ./terraform
 
       - name: Terraform Validate
         run: terraform validate
         working-directory: ./terraform
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+        run: |
+          terraform plan -input=false -out=tfplan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         working-directory: ./terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -input=false -auto-approve tfplan
         working-directory: ./terraform
